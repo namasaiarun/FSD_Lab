@@ -1,0 +1,291 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Student Admission Form</title> 
+    <style> 
+        /* General Body Styling - Keep for centering and basic font */ 
+        body { 
+            font-family: sans-serif; /* Simpler default font */ 
+            background-color: #f3f4f6; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 20px; 
+            box-sizing: border-box; 
+            margin: 0; 
+        } 
+ 
+        /* Form Container - Basic centering and width */ 
+        .form-container { 
+            background-color: #fff; 
+            padding: 20px; /* Reduced padding */ 
+            border-radius: 8px; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Lighter shadow */ 
+            width: 100%; 
+            max-width: 450px; /* Slightly smaller max width */ 
+            border: 1px solid #ddd; /* Lighter border */ 
+        } 
+ 
+        /* Form Title - Basic alignment and font size */ 
+        .form-title { 
+            font-size: 24px; 
+            text-align: center; 
+            margin-bottom: 20px; 
+            color: #333; 
+        } 
+ 
+        /* Form Group - Basic spacing between fields */ 
+        .form-group { 
+            margin-bottom: 15px; 
+        } 
+ 
+ 
+        /* Labels - Keep them block level for consistent layout */ 
+        .form-label { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-weight: bold; 
+            color: #555; 
+        } 
+ 
+        /* Inputs and Select - Minimal styling, mostly browser default */ 
+        .form-input, 
+        .form-select { 
+            width: 100%; 
+            padding: 8px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+            box-sizing: border-box; /* Ensures padding doesn't add to total 
+width */ 
+        } 
+ 
+        /* Checkbox Group - Basic flex for alignment */ 
+        .checkbox-group { 
+            display: flex; 
+            align-items: center; 
+            margin-bottom: 15px; 
+        } 
+ 
+        /* Checkbox Label - Simple spacing */ 
+        .checkbox-label { 
+            margin-left: 8px; 
+        } 
+ 
+        .checkbox-label a { 
+            color: #007bff; /* Standard link blue */ 
+            text-decoration: none; 
+        } 
+ 
+        .checkbox-label a:hover { 
+            text-decoration: underline; 
+        } 
+ 
+        /* Submit Button - Basic, relies on browser default look more */ 
+        .submit-button { 
+            width: 100%; 
+            padding: 10px; 
+            background-color: #007bff; /* Standard button blue */ 
+            color: white; 
+            border: none; 
+            border-radius: 4px; 
+ 
+            cursor: pointer; 
+            font-size: 16px; 
+        } 
+ 
+        .submit-button:hover { 
+            background-color: #0056b3; /* Darker blue on hover */ 
+        } 
+ 
+        /* Error Message Styling - Essential for feedback */ 
+        .error-message { 
+            color: red; 
+            font-size: 12px; 
+            margin-top: 5px; 
+        } 
+ 
+        /* Success Message Styling - Essential for feedback */ 
+        #success-message { 
+            margin-top: 20px; 
+            padding: 10px; 
+            border-radius: 4px; 
+            background-color: #d4edda; /* Light green */ 
+            color: #155724; /* Dark green text */ 
+            text-align: center; 
+            /* display: none; Initially hidden */ 
+        } 
+ 
+        /* Hide utility class - Essential for JavaScript functionality */ 
+        .hidden { 
+            display: none; 
+        } 
+    </style> 
+</head> 
+<body> 
+ 
+    <div class="form-container"> 
+        <h2 class="form-title">Student Admission Form</h2> 
+ 
+        <form id="admissionForm"> 
+            <!-- Full Name Input --> 
+            <div class="form-group"> 
+                <label for="fullName" class="form-label">Full Name</label> 
+                <input type="text" id="fullName" class="form-input" placeholder="John Doe"> 
+                <p id="fullNameError" class="error-message"></p> 
+            </div> 
+ 
+            <!-- Email Input --> 
+            <div class="form-group"> 
+ 
+                <label for="email" class="form-label">Email Address</label> 
+                <input type="email" id="email" class="form-input" placeholder="john.doe@example.com"> 
+                <p id="emailError" class="error-message"></p> 
+            </div> 
+ 
+            <!-- Date of Birth Input --> 
+            <div class="form-group"> 
+                <label for="dateOfBirth" class="form-label">Date of Birth</label> 
+                <input type="date" id="dateOfBirth" class="form-input"> 
+                <p id="dateOfBirthError" class="error-message"></p> 
+            </div> 
+ 
+            <!-- Course Selection --> 
+            <div class="form-group"> 
+                <label for="course" class="form-label">Select Course</label> 
+                <select id="course" class="form-select"> 
+                    <option value="">-- Please Select --</option> 
+                    <option value="computer_science">Computer Science</option> 
+                    <option value="business_administration">Business Administration</option> 
+                    <option value="electrical_engineering">Electrical Engineering</option> 
+                    <option value="arts_humanities">Arts & Humanities</option> 
+                </select> 
+                <p id="courseError" class="error-message"></p> 
+            </div> 
+ 
+            <!-- Terms and Conditions Checkbox --> 
+            <div class="checkbox-group"> 
+                <input type="checkbox" id="terms" class="form-checkbox"> 
+                <label for="terms" class="checkbox-label"> 
+                    I agree to the <a href="#">terms and conditions</a> 
+                </label> 
+                <p id="termsError" class="error-message" style="margin-left: 8px;"></p> 
+            </div> 
+ 
+            <!-- Submit Button --> 
+            <div class="form-group"> 
+                <button type="submit" class="submit-button"> 
+                    Submit Admission 
+                </button> 
+            </div> 
+        </form> 
+ 
+        
+ 
+ <!-- Success Message --> 
+        <div id="success-message" class="hidden"> 
+            <p>Form submitted successfully! We'll be in touch soon.</p> 
+        </div> 
+    </div> 
+ 
+    <script> 
+        // Get the form element 
+        const admissionForm = document.getElementById('admissionForm'); 
+        // Get the success message element 
+        const successMessage = document.getElementById('success-message'); 
+ 
+        // Add an event listener for form submission 
+        admissionForm.addEventListener('submit', function(event) { 
+            // Prevent the default form submission behavior (which would reload the page) 
+            event.preventDefault(); 
+            // Call the validateForm function and check its return value 
+            if (validateForm()) { 
+                // If validation passes, display the success message 
+                successMessage.classList.remove('hidden'); // Show the success message 
+                admissionForm.reset(); // Optionally reset the form fields 
+               } else { 
+                // If validation fails, ensure the success message is hidden 
+                successMessage.classList.add('hidden'); 
+            } 
+        }); 
+ 
+        /** 
+         * Validates all form fields. 
+         * @returns {boolean} - True if all fields are valid, false otherwise. 
+         */ 
+        function validateForm() { 
+            let isValid = true; // Flag to track overall form validity 
+ 
+            // Get references to all input fields and their error message paragraphs 
+            const fullNameInput = document.getElementById('fullName'); 
+            const emailInput = document.getElementById('email'); 
+            const dateOfBirthInput = document.getElementById('dateOfBirth'); 
+            const courseSelect = document.getElementById('course'); 
+            const termsCheckbox = document.getElementById('terms'); 
+ 
+            document.getElementById('dateOfBirthError'); 
+            const fullNameError = document.getElementById('fullNameError');
+            const emailError = document.getElementById('emailError');
+            const dateOfBirthError = document.getElementById('dateOfBirthError');
+            const courseError = document.getElementById('courseError'); 
+            const termsError = document.getElementById('termsError'); 
+ 
+            // --- Full Name Validation --- 
+            if (fullNameInput.value.trim() === '') { 
+                fullNameError.textContent = 'Full Name is required.'; 
+                isValid = false; 
+            } else { 
+                fullNameError.textContent = ''; // Clear error if valid 
+            } 
+ 
+            // --- Email Validation --- 
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex 
+            if (emailInput.value.trim() === '') { 
+                emailError.textContent = 'Email Address is required.'; 
+                isValid = false; 
+            } else if (!emailRegex.test(emailInput.value.trim())) {
+                emailError.textContent = 'Please enter a valid email address.';
+                isValid = false; 
+            } else { 
+                emailError.textContent = ''; 
+            } 
+ 
+            // --- Date of Birth Validation --- 
+            const dobValue = dateOfBirthInput.value; // Get the date string (e.g., "YYYY-MM-DD")
+            if (dobValue === '') { 
+                dateOfBirthError.textContent = 'Date of Birth is required.'; 
+                isValid = false; 
+            } else { 
+                const selectedDate = new Date(dobValue); 
+                const today = new Date(); 
+                if (selectedDate > today) {
+                    dateOfBirthError.textContent = 'Date of Birth cannot be in the future.';
+                    isValid = false;
+                } else {
+                    dateOfBirthError.textContent = '';
+                }
+            } 
+ 
+            // --- Course Selection Validation ---
+            if (courseSelect.value === '') {
+                courseError.textContent = 'Please select a course.';
+                isValid = false;
+            } else {
+                courseError.textContent = '';
+            }
+ 
+            // --- Terms and Conditions Validation --- 
+            if (!termsCheckbox.checked) {
+                termsError.textContent = 'You must agree to the terms and conditions.';
+                isValid = false; 
+            } else { 
+                termsError.textContent = ''; 
+            } 
+ 
+            return isValid; // Return the overall validity status 
+        } 
+    </script> 
+</body> 
+</html>
